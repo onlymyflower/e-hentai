@@ -6,6 +6,8 @@
 # so be carefull
 # if it occurs site unreachable error, open your VPN, set global proxy
 
+from download_page import download_page
+
 import requests
 from bs4 import BeautifulSoup
 import urllib
@@ -17,14 +19,14 @@ from multiprocessing.dummy import Pool as ThreadPool
 DEF_DEBUG = 0
 THREAD_NUM = 16
 
-benzi_url = 'https://e-hentai.org/g/1186974/3811656035/'
+benzi_url = 'https://e-hentai.org/g/1186974/3811656035/' # kiara hotsprint event
 
-def download_page(url):
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36'
-    }
-    data = requests.get(url, headers=headers).content
-    return data
+# def download_page(url):
+#     headers = {
+#         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36'
+#     }
+#     data = requests.get(url, headers=headers).content
+#     return data
 
 test_filename = 'test.html'
 

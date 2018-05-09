@@ -6,8 +6,6 @@
 # so be carefull
 # if it occurs site unreachable error, open your VPN, set global proxy
 
-from download_page import download_page
-
 import requests
 from bs4 import BeautifulSoup
 import urllib
@@ -22,7 +20,8 @@ import sys
 DEF_DEBUG = 0
 THREAD_NUM = 16
 
-EXAMPLE_URLS = ['https://e-hentai.org/g/1186974/3811656035/']
+EXAMPLE_URLS = ["https://e-hentai.org/g/1218568/aa645c1938/",
+"https://e-hentai.org/g/1186974/3811656035/",]
 
 TMP_PATH = os.getcwd() + '/' + 'tmp'
 os.makedirs(TMP_PATH, exist_ok=True)
@@ -30,12 +29,12 @@ os.makedirs(TMP_PATH, exist_ok=True)
 # url_count = 1
 
 
-# def download_page(url):
-#     headers = {
-#         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36'
-#     }
-#     data = requests.get(url, headers=headers).content
-#     return data
+def download_page(url):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36'
+    }
+    data = requests.get(url, headers=headers).content
+    return data
 
 test_filename = 'test.html'
 
@@ -53,18 +52,18 @@ def deal_with_sub_div(sub_div, save_path = TMP_PATH):
         f.write(img_get.content)
 
 def deal_with_url(url):
-    print("program starts at:")
-    print(time.asctime())
-
+    
     # make the Pool of workers
     thread_num = 2
 
     html_doc = download_page(url).decode('utf-8')
     soup = BeautifulSoup(html_doc,"lxml")
+    # with open("debug.html", "w") as f:
+        # f.write(html_doc)
     # find elements by id
     img_table = soup.find("div", {"id": 'gdt'})
     #retuimg_div_list = img_table.find_all("div", {"class": 'gdtm'})
-    img_div_list = img_table.find_all("div", {"class": "dg`"})
+    img_div_list = img_table.find_all("div", {"class": "gdtm"})
     return img_div_list
     # print(len(img_div_list))
     # tasks = [(img_div, save_path) for img_div in img_div_list for save_path in save_path_dup]
@@ -77,8 +76,7 @@ def deal_with_url(url):
     # pool = Pool(thread_num)
     # pool.map(deal_with_sub_div, tasks)
     # pool.close()
-    print("program ends at:")
-    print(time.asctime())
+    
 
 def main():
     sys.setrecursionlimit(2000)
@@ -89,11 +87,14 @@ def main():
     url_count = 0
     for url in args.urls:
         img_div_list = deal_with_url(url)
-    	# save_path = TMP_PATH + '/' + str(url_count)
-    	save_path = TMP_PATH + '/' + str(url_count)
-    	os.makedirs(save_path, exist_ok=True)
-    	for sub_div in img_div_list:
-        	deal_with_sub_div(sub_div, save_path)
+        save_path = TMP_PATH + '/' + str(url_count)
+        os.makedirs(save_path, exist_ok=True)
+        for sub_div in img_div_list:
+            print("download url starts at:")
+            print(time.asctime())
+            deal_with_sub_div(sub_div, save_path)
+            print("download url ends at:")
+            print(time.asctime())
         url_count += 1
 
 if __name__ == '__main__':
