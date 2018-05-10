@@ -3,7 +3,7 @@
 *.mov
 xvideo*
 debug*
-log*
+*log*
 *.html
 tmp
 .DS_Store
