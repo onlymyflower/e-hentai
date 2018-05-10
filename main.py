@@ -18,12 +18,30 @@ from multiprocessing.dummy import Pool as ThreadPool
 import argparse
 import sys
 
+MY_THREAD_NUM = 16
+
+
 # QUERY = "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=%E3%82%86%E3%82%8B%E3%82%86%E3%82%8A&f_apply=Apply+Filter&inline_set=dm_t"
 # QUERY = "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=yuruyuri&f_apply=Apply+Filter"
 # "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=yuruyuri&f_apply=Apply+Filter"
-QUERY = "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=yuruyuri&f_apply=Apply+Filter&inline_set=dm_t"
-QUERY_NAME = "YuruYuri"
-QUERIES_TUPLE = [(QUERY_NAME, QUERY)]
+QUERY1 = "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=yuruyuri&f_apply=Apply+Filter&inline_set=dm_t"
+QUERY1_NAME = "YuruYuri"
+QUERY2 = "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=Honkai+3&f_apply=Apply+Filter&inline_set=dm_t"
+QUERY2_NAME = "Honkai 3"
+# QUERY2 = "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=Honkai+3&f_apply=Apply+Filter&inline_set=dm_t"
+# QUERY2_NAME = "hatsune miku"
+# QUERY2 = "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=Honkai+3&f_apply=Apply+Filter&inline_set=dm_t"
+# QUERY2_NAME = "umaru"
+
+# queries list
+# "YuruYuri"
+# "Honkai 3"
+# Asuna
+# Kantai Collection
+
+
+
+QUERIES_TUPLE = [(QUERY2_NAME, QUERY2), (QUERY1_NAME, QUERY1)]
 
 # "https://e-hentai.org/?f_doujinshi=on&f_manga=on&f_artistcg=on&f_gamecg=on&f_western=on&f_non-h=on&f_imageset=on&f_cosplay=on&f_asianporn=on&f_misc=on&f_search=%E3%82%86%E3%82%8B%E3%82%86%E3%82%8A&f_apply=Apply+Filter"
 # get query
@@ -64,16 +82,16 @@ def deal_with_url(url):
 
 # download single benzi
 def download_benzi(sourceUrl="https://e-hentai.org/g/1178073/30bc24b00a/",benzi_store_path=os.environ['HOME'] + "/" +"tmp"):
-    
+
     print("Starts downloading at:")
     print(time.asctime())
 
     os.makedirs(benzi_store_path, exist_ok=True)
-    
+
     print("downloading: " + sourceUrl)
 
     img_div_list = deal_with_url(sourceUrl)
-    
+
 
     with open("debug.txt","w") as f:
         print(img_div_list,file=f)
@@ -85,11 +103,11 @@ def download_benzi(sourceUrl="https://e-hentai.org/g/1178073/30bc24b00a/",benzi_
 
 def run_func(args):
     download_benzi(args[0], args[1])
-    
+
 def __main__():
 
-    rootpath = os.environ['HOME'] + "/" +"tmp"
-    THREAD_NUM = 8
+    rootpath = os.environ['HOME'] + "/" +"weiyun/benzi" # /Users/HuangKan/GoogleDrive
+    test_thread_num = MY_THREAD_NUM
     # var
     sourceUrls = []
     benzi_store_paths = []
@@ -130,7 +148,7 @@ def __main__():
             # another TODO, handle timeout and skip
 
         # Multithread
-        pool = ThreadPool(THREAD_NUM)
+        pool = ThreadPool(test_thread_num)
         tasks = [(x, y) for x in sourceUrls for y in benzi_store_paths]
         # tasks = [(sourceUrls, benzi_store_paths) for sourceUrl, benzi_store_path in enumerate(url_local_map)]
         # with open("debug_tasks.txt", "w") as f:
