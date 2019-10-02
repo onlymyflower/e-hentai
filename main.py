@@ -4,7 +4,7 @@
 
 # The codes do something that disobey FBI warning
 # so be carefull
-# if it occurs site unreachable error, open your VPN, set global proxy
+# and if it occurs site unreachable error, open your VPN, set global proxy
 from download_page import download_page
 
 import requests

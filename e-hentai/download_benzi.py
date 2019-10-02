@@ -22,11 +22,13 @@ import logging
 # rootpath=os.environ['HOME'] + "/" +"tmp"
 
 # save a set of images to a default path
-def deal_with_sub_div(sub_div,rootpath=os.environ['HOME'] + "/" +"tmp"):
+
+
+def deal_with_sub_div(sub_div, rootpath=os.environ['HOME'] + "/" + "tmp"):
     sub_img_a = sub_div.find("a", recursive=True)
     sub_img_url = sub_img_a['href']
     sub_html = download_page(sub_img_url).decode('utf-8')
-    sub_soup = BeautifulSoup(sub_html,"lxml")
+    sub_soup = BeautifulSoup(sub_html, "lxml")
     img = sub_soup.find("img", {"id": "img"}, recursive=True)
     img_url = img["src"]
     print(img_url)
@@ -37,6 +39,7 @@ def deal_with_sub_div(sub_div,rootpath=os.environ['HOME'] + "/" +"tmp"):
         f.write(img_get.content)
         print("saved to: " + rootpath + '/' + image_name)
 
+<<<<<<< HEAD:download_benzi.py
 def deal_with_url(url):
     html_doc = download_page(url).decode('utf-8')
     soup = BeautifulSoup(html_doc,"lxml")
@@ -58,9 +61,13 @@ def deal_with_url(url):
 
     img_div_list = img_table.find_all("div", {"class": "gdtm"})
     return img_div_list
+=======
+>>>>>>> 0861feb... update code to rebuild for e-hentai:e-hentai/download_benzi.py
 
 # download single benzi
-def download_benzi(sourceUrl="https://e-hentai.org/g/1178073/30bc24b00a/",benzi_store_path=os.environ['HOME'] + "/" +"tmp"):
+
+
+def download_benzi(sourceUrl="https://e-hentai.org/g/1178073/30bc24b00a/", benzi_store_path=os.environ['HOME'] + "/" + "tmp"):
 
     print("Starts downloading at:")
     print(time.asctime())
@@ -71,13 +78,8 @@ def download_benzi(sourceUrl="https://e-hentai.org/g/1178073/30bc24b00a/",benzi_
 
     img_div_list = deal_with_url(sourceUrl)
 
-
-    with open("debug.txt","w") as f:
-        print(img_div_list,file=f)
     for sub_div in img_div_list:
         deal_with_sub_div(sub_div, benzi_store_path)
 
     print("Finishes downloading at:")
     print(time.asctime())
-
-
