@@ -75,16 +75,18 @@ def doujinshi_parser(url):
 
 
 def main():
-    doujinshi_url = "https://e-hentai.org/g/1178073/30bc24b00a/"
-
+    # 多页图片doujinshi，测试
     doujinshi_url = "https://e-hentai.org/g/980918/a3e70a1ca8/"
+
+    # 单页图片doujinshi，测试
+    doujinshi_url = "https://e-hentai.org/g/1178073/30bc24b00a/"
 
     _ = doujinshi_parser(doujinshi_url)
 
     # 如果jap标题为空，就用eng标题
+    folder = _["jap_name"]
     if _["jap_name"] == "":
         folder = _["eng_name"]
-    folder = _["jap_name"]
 
     from downloader import Downloader
     downloader = Downloader()

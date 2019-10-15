@@ -14,10 +14,12 @@ try:
 except ImportError:
     from urlparse import urlparse
 
+from constant import PROXY
+from utils import Singleton
+from logger import logger
 '''
 from ehentai.constant import PROXY
 from ehentai.logger import logger
-# from ehentai.parser import request
 from ehentai.utils import Singleton
 '''
 

@@ -1,5 +1,4 @@
 requests>=2.20.0
-beautifulsoup4==4.6.0
 BeautifulSoup4>=4.0.0
 threadpool>=1.2.7
 tabulate>=0.7.5
