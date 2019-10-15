@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-requests==2.18.4
+requests>=2.20.0
 beautifulsoup4==4.6.0
-=======
-requests>=2.5.0
 BeautifulSoup4>=4.0.0
 threadpool>=1.2.7
 tabulate>=0.7.5
 future>=0.15.2
->>>>>>> 0861feb... update code to rebuild for e-hentai

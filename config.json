@@ -1,0 +1,7 @@
+{
+    "download_mode":"parallel", // queue or parallel
+    "thread_num":4, // 4 for test
+    "download_base_path":".",
+    // TODO proxy config
+    "proxy": false
+}
