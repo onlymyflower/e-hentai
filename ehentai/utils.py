@@ -9,7 +9,6 @@ import sys
 import os
 import string
 import requests
-# from manhuagui.logger import logger
 
 
 def download_page(url):

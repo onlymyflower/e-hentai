@@ -39,31 +39,28 @@ def deal_with_sub_div(sub_div, rootpath=os.environ['HOME'] + "/" + "tmp"):
         f.write(img_get.content)
         print("saved to: " + rootpath + '/' + image_name)
 
-<<<<<<< HEAD:download_benzi.py
+
 def deal_with_url(url):
     html_doc = download_page(url).decode('utf-8')
-    soup = BeautifulSoup(html_doc,"lxml")
+    soup = BeautifulSoup(html_doc, "lxml")
     # find elements by id
     img_table = soup.find("div", {"id": "gdt"})
     try:
         assert img_table != None
     except AssertionError:
-        logging.error("img_table is None, maybe encountered warning window", exc_info=True)
-        with open("warning.html","w") as f:
-            print(html_doc,file=f)
+        logging.error(
+            "img_table is None, maybe encountered warning window", exc_info=True)
+        with open("warning.html", "w") as f:
+            print(html_doc, file=f)
         # program won't exit
         # keep tackle that
         # https://e-hentai.org/g/1192266/8f3bc71342/?nw=session
         # https://e-hentai.org/g/1192266/8f3bc71342/?nw=always
         new_url = url + "/" + "?nw=session"
-        return deal_with_url(new_url) # recursive?
-
+        return deal_with_url(new_url)  # recursive?
 
     img_div_list = img_table.find_all("div", {"class": "gdtm"})
     return img_div_list
-=======
->>>>>>> 0861feb... update code to rebuild for e-hentai:e-hentai/download_benzi.py
-
 # download single benzi
 
 

@@ -7,8 +7,7 @@
 import os
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-
-from utils import download_page
+from ehentai.utils import download_page
 
 
 def doujinshi_parser(url):

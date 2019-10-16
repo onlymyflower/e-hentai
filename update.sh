@@ -1,4 +1,4 @@
 #!/bin/sh
 git add -A
-git commit -am "update `date`"
+git commit -am "first test successfully `date`"
 git push

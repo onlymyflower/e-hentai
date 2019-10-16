@@ -14,14 +14,9 @@ try:
 except ImportError:
     from urlparse import urlparse
 
-from constant import PROXY
-from utils import Singleton
-from logger import logger
-'''
 from ehentai.constant import PROXY
 from ehentai.logger import logger
 from ehentai.utils import Singleton
-'''
 
 requests.packages.urllib3.disable_warnings()
 

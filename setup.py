@@ -17,13 +17,13 @@ def long_description():
 
 
 setup(
-    name='e-hentai',
+    name='ehentai',
     version=__version__,
     author=__author__,
     author_email=__email__,
     description='e-hentai.com comics downloader',
     long_description=long_description(),
-    keywords=['e-hentai', 'comics'],
+    keywords=['ehentai', 'e-hentai', 'comics'],
     maintainer=__author__,
     maintainer_email=__email__,
     license='MIT',
@@ -44,7 +44,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'ehentai = ehentai.command:main',
+            'ehentai=ehentai.command:main',
         ]
     },
 )
